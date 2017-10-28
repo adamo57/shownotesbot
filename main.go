@@ -38,7 +38,6 @@ func main() {
 			}
 		}
 	}
-	http.ListenAndServe(port, nil)
 }
 
 func checkPodcastStatus(api *slack.Client, podcastStatusText string) {
