@@ -38,7 +38,7 @@ func main() {
 			}
 		}
 	}
-	net.Listen("tcp", ":"+port)
+	net.Listen("tcp", "0.0.0.0:"+port)
 }
 
 func checkPodcastStatus(api *slack.Client, podcastStatusText string) {
