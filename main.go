@@ -5,6 +5,7 @@ import (
 	"os"
 	"regexp"
 	"log"
+	"net/http"
 )
 
 //IsPodcastRunning is the conditional that tells
@@ -35,6 +36,8 @@ func main() {
 			}
 		}
 	}
+
+	http.ListenAndServe(":8000", nil)
 }
 
 func checkPodcastStatus(api *slack.Client, podcastStatusText string) {
