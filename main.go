@@ -8,7 +8,7 @@ import (
 )
 
 //IsPodcastRunning is the conditional that tells
-// the app whether or not the podcast is running
+// the app whether or not the podcast is running.
 var IsPodcastRunning = false
 
 func main() {
