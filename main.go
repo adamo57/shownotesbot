@@ -5,7 +5,6 @@ import (
 	"os"
 	"regexp"
 	"log"
-	"net/http"
 	"net"
 )
 
