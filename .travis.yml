@@ -19,3 +19,8 @@ before_script:
 script:
   - go vet -v ./...                                            # go vet is the official Go static analyzer
   - golint -set_exit_status $PKGS                              # one last linter
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: ecdd7f576486cf905904142c744622de
