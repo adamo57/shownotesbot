@@ -22,5 +22,6 @@ script:
 
 deploy:
   provider: heroku
+  app: "stark-ravine-71619"
   api_key:
     secure: $HEROKU_KEY
