@@ -5,6 +5,7 @@ import (
 	"os"
 	"regexp"
 	"log"
+	"net/http"
 )
 
 //IsPodcastRunning is the conditional that tells
@@ -12,6 +13,7 @@ import (
 var IsPodcastRunning = false
 
 func main() {
+	port := os.Getenv("PORT")
 	api := slack.New(os.Getenv("SLACK_TOKEN"))
 
 	rtm := api.NewRTM()
@@ -31,19 +33,24 @@ func main() {
 			}
 
 			if IsPodcastRunning == true && match == true {
-				api.PostMessage("general", ev.Text, slack.NewPostMessageParameters())
+				api.PostMessage("general", ev.Text,
+					slack.NewPostMessageParameters())
 			}
 		}
 	}
+	http.ListenAndServe(port, nil)
 }
 
 func checkPodcastStatus(api *slack.Client, podcastStatusText string) {
 	if podcastStatusText == "start podcast" {
-		api.PostMessage("general", "I am now listening, type _stop podcast_ " +
-			"to tell me to stop listening and give you a list", slack.NewPostMessageParameters())
+		api.PostMessage("general",
+			"I am now listening, type _stop podcast_ " +
+			"to tell me to stop listening and give you a list",
+				slack.NewPostMessageParameters())
 		IsPodcastRunning = true
 	} else if podcastStatusText == "stop podcast"{
-		api.PostMessage("general", "I am now *not* listening", slack.NewPostMessageParameters())
+		api.PostMessage("general", "I am now *not* listening",
+			slack.NewPostMessageParameters())
 		IsPodcastRunning = false
 	}
 }
