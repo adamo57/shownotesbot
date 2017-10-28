@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/nlopes/slack"
 	"os"
-	"fmt"
 	"regexp"
 )
 
@@ -21,7 +20,7 @@ func main() {
 			match, err := regexp.MatchString("^<", ev.Text)
 
 			if match == true && err == nil {
-				fmt.Println(ev.Text)
+				api.PostMessage("general", ev.Text, slack.NewPostMessageParameters())
 			}
 		}
 	}
