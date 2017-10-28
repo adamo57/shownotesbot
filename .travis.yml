@@ -1,0 +1,22 @@
+language: go
+
+go:
+  - 1.9.x
+  - tip
+
+notifications:
+  email: true
+
+# Anything in before_script: that returns a nonzero exit code will
+# flunk the build and immediately stop. It's sorta like having
+# set -e enabled in bash.
+before_script:
+  - PKGS=$(go list ./... | grep -v /vendor/)             # All the import paths, excluding vendor/
+  - go get github.com/golang/lint/golint                 # Linter
+
+# script always run to completion (set +e). All of these code checks are must haves
+# in a modern Go project.
+script:
+  - diff -u <(echo -n) <(gofmt -d ./)                          # Fail if a .go file hasn't been formatted with gofmt
+  - go vet -v ./...                                            # go vet is the official Go static analyzer
+  - golint -set_exit_status $PKGS                              # one last linter
