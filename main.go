@@ -6,6 +6,7 @@ import (
 	"regexp"
 	"log"
 	"net/http"
+	"net"
 )
 
 //IsPodcastRunning is the conditional that tells
@@ -38,6 +39,7 @@ func main() {
 			}
 		}
 	}
+	net.Listen("tcp", port)
 }
 
 func checkPodcastStatus(api *slack.Client, podcastStatusText string) {
