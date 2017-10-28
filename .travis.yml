@@ -17,6 +17,5 @@ before_script:
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
 script:
-  - diff -u <(echo -n) <(gofmt -d ./)                          # Fail if a .go file hasn't been formatted with gofmt
   - go vet -v ./...                                            # go vet is the official Go static analyzer
   - golint -set_exit_status $PKGS                              # one last linter
